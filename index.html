@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kırık Ayna</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background-color: black;
+            color: white;
+        }
+        #mirror-container {
+            width: 100%;
+            max-width: 600px;
+            margin: auto;
+            position: relative;
+        }
+        #mirror-video {
+            width: 100%;
+            height: auto;
+            border: 5px solid white;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+        #mirror-overlay {
+            width: 100%;
+            height: auto;
+            position: relative;
+            z-index: 2;
+        }
+        #text-container {
+            margin-top: 20px;
+            font-size: 20px;
+        }
+        #question {
+            margin-top: 15px;
+            font-size: 18px;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <h1>Kırık Ayna: Kendini Gör</h1>
+    <div id="mirror-container">
+        <video id="mirror-video" autoplay playsinline muted></video>
+        <img id="mirror-overlay" src="https://yourwebsite.com/broken_mirror.png" alt="Kırık Ayna">
+    </div>
+    <div id="text-container">
+        <p>“Gerçek ayna, sadece seni yansıtmaz; seni sana hatırlatır.”</p>
+    </div>
+    <div id="question">
+        <p>Sen, kırık aynanın hangi parçasında kendini buluyorsun?</p>
+        <p><b>#MelisaArel</b> etiketiyle Instagram’da paylaş!</p>
+    </div>
+    <script>
+        async function startCamera() {
+            const video = document.getElementById('mirror-video');
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+                video.srcObject = stream;
+            } catch (error) {
+                console.error("Kamera erişimi engellendi: ", error);
+                alert("Kamera erişimine izin vermelisiniz!");
+            }
+        }
+        window.onload = startCamera;
+    </script>
+</body>
+</html>
